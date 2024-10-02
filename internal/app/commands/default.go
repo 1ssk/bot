@@ -14,3 +14,19 @@ func (c *Commander) Default(inputMessage *tgbotapi.Message) {
 
 	c.bot.Send(msg)
 }
+
+func (c *Commander) HandleUpdate(update tgbotapi.Update) {
+	if update.Message == nil {
+		return
+	}
+	switch update.Message.Command() {
+	case "help":
+		c.Help(update.Message)
+	case "list":
+		c.List(update.Message)
+	case "get":
+		c.Get(update.Message)
+	default:
+		c.Default(update.Message)
+	}
+}
