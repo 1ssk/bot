@@ -16,6 +16,13 @@ func (c *Commander) Default(inputMessage *tgbotapi.Message) {
 }
 
 func (c *Commander) HandleUpdate(update tgbotapi.Update) {
+
+	defer func() {
+		if panicValue := recover(); panicValue != nil {
+			log.Printf("recovered from panic: %v", panicValue) // don't stop program! @ssk
+		}
+	}()
+
 	if update.Message == nil {
 		return
 	}
