@@ -48,6 +48,8 @@ func (c *Commander) HandleUpdate(update tgbotapi.Update) {
 		c.Get(update.Message)
 	case "delete":
 		c.Delete(update.Message)
+	case "clear":
+		c.Clear(update.Message)
 	default:
 		c.Default(update.Message)
 	}
